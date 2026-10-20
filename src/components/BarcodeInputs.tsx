@@ -5,11 +5,7 @@ interface BarcodeInputsProps {
   onBarcodeChange: (index: number, value: string) => void;
 }
 
-export default function BarcodeInputs({
-  count,
-  barcodes,
-  onBarcodeChange,
-}: BarcodeInputsProps) {
+export default function BarcodeInputs({count,barcodes,onBarcodeChange,}: BarcodeInputsProps) {
   return (
     <div className="barcode-grid">
       {Array.from({ length: count }, (_, index) => (

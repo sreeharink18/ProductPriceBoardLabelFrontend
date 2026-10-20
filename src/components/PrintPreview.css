@@ -1,4 +1,4 @@
-
+/* 
 .preview-overlay {
   position: fixed;
   inset: 0;
@@ -77,7 +77,8 @@
   width: 210mm;
   height: 297mm;
   box-sizing: border-box;
-  padding: 8mm;
+  padding: 100px;
+  padding-bottom: 108px;
   margin: 0 auto;
   background: white;
   display: flex;
@@ -87,9 +88,9 @@
 
 .a4-paper.labels-1 { --label-scale: 1; }
 .a4-paper.labels-2 { --label-scale: 0.58; }
-.a4-paper.labels-3 { --label-scale: 0.42; }
-.a4-paper.labels-4 { --label-scale: 0.33; }
-.a4-paper.labels-5 { --label-scale: 0.27; }
+.a4-paper.labels-3 { --label-scale: 0.32; }
+.a4-paper.labels-4 { --label-scale: 0.24; }
+.a4-paper.labels-5 { --label-scale: 0.19; }
 
 .product-label {
   flex: 1 1 0;
@@ -97,12 +98,12 @@
   width: 100%;
   box-sizing: border-box;
   padding: 3mm 5mm;
-  border-bottom: 1px solid #222;
+  border-bottom: 1px dashed #222;
 
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  justify-content: space-evenly;
+  justify-content: center;
   text-align: center;
 
   overflow: hidden;
@@ -119,11 +120,16 @@
 .currency-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  /* border-top: 1px solid #222; */
+  gap: 12px;
   padding-top: 2mm;
   font-size: calc(50px * var(--label-scale));
   font-weight: 600;
+}
+
+.currency-line {
+  flex: 1;
+  height: 1px;
+  background-color: #222;
 }
 
 .label-price {
@@ -153,81 +159,146 @@
   text-align: center;
   direction: rtl;
 }
+.product-label {
+  gap: 2px;
+  min-height: 0;
+}
+
+.label-arabic-price,
+.label-price,
+.label-arabic,
+.label-english {
+  flex-shrink: 1;
+  overflow-wrap: anywhere;
+}
+
+.label-arabic {
+  font-size: calc(65px * var(--label-scale));
+  line-height: 1.1;
+}
+
+.label-english {
+  font-size: calc(50px * var(--label-scale));
+  line-height: 1.1;
+}
+
+.label-country {
+  font-size: calc(35px * var(--label-scale));
+  line-height: 1.1;
+  flex-shrink: 0;
+}
 
 @media print {
   html,
   body,
   #root {
     width: 210mm !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    background: white !important;
-  }
-
-  body * {
-    visibility: hidden !important;
-  }
-
-  .preview-overlay,
-  .preview-overlay * {
-    visibility: visible !important;
-  }
-
- .preview-toolbar,
- .preview-actions,
- .preview-button,
- .no-print {
-     display: none !important;
- }
-
-  .preview-overlay {
-    position: absolute !important;
-    left: 0 !important;
-    top: 0 !important;
-    width: 210mm !important;
     height: 297mm !important;
     margin: 0 !important;
     padding: 0 !important;
     overflow: hidden !important;
     background: white !important;
+  }
+
+  /* Hide everything by default */
+  /* body * {
+    visibility: hidden !important;
+  } */
+
+  /* Show only the A4 paper and its contents */
+  /* .a4-paper,
+  .a4-paper * {
+    visibility: visible !important;
+  } */
+
+  /* Hide toolbar, barcode count, buttons and headings */
+  /* .preview-toolbar,
+  .preview-actions,
+  .preview-button,
+  .no-print {
+    display: none !important;
+  } */
+
+  /* Remove the preview screen background and spacing */
+  /* .preview-overlay {
+    position: static !important;
+    inset: auto !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
   }
 
   .paper-container {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
     display: block !important;
     width: 210mm !important;
-    height: 297mm !important;
+    height: 320mm !important;
     margin: 0 !important;
     padding: 0 !important;
     overflow: hidden !important;
   }
 
-  .a4-paper {
+   */
+  /* .a4-paper {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+
     width: 210mm !important;
     height: 297mm !important;
     box-sizing: border-box !important;
+
+    padding: 100px !important;
+    padding-bottom: 108px !important;
+
     margin: 0 !important;
-    padding: 8mm !important;
+    background: white !important;
     box-shadow: none !important;
     overflow: hidden !important;
+
     display: flex !important;
     flex-direction: column !important;
   }
+
 
   .product-label {
-    flex: 1 1 0 !important;
-    min-height: 0 !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-evenly !important;
-    align-items: stretch !important;
-    overflow: hidden !important;
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-  }
+    padding-bottom: 50px !important;
+  flex: 1 1 0 !important;
+  min-height: 0 !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  overflow: hidden !important;
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+}
 
-  .label-country {
+.label-arabic,
+.label-english {
+  line-height: 1.1 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.label-country {
+  flex-shrink: 0 !important;
+  line-height: 1.1 !important;
+}
+
+ 
+  .currency-line {
+    display: block !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    height: 0 !important;
+    border-top: 1px solid #222 !important;
+    background: none !important;
+  } */
+
+  /* .label-country {
     display: block !important;
     visibility: visible !important;
     width: 100% !important;
@@ -235,8 +306,8 @@
     direction: rtl !important;
     font-weight: 700 !important;
     flex-shrink: 0 !important;
-  }
-}
+  } */
+/* }
 
 @media screen and (max-width: 760px) {
   .preview-overlay {
@@ -256,4 +327,142 @@
   .a4-paper {
     flex: 0 0 210mm;
   }
+}  */
+
+.preview-overlay { position: fixed; inset: 0; z-index: 1000; overflow-y: auto; background: #eef1f6; padding: 24px; }
+.preview-toolbar { max-width: 1100px; margin: 0 auto 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.preview-toolbar h2 { margin: 0; font-size: 22px; }
+.preview-toolbar p { margin: 6px 0 0; color: #697386; font-size: 13px; }
+.preview-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.preview-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 0 15px; border: 0; border-radius: 8px; font-weight: 600; cursor: pointer; }
+.preview-button.primary { color: white; background: #e30613; }
+.preview-button.secondary { color: #263248; background: white; border: 1px solid #dce1e9; }
+.paper-container { display: flex; justify-content: center; padding-bottom: 24px; }
+
+@page { size: A4 portrait; margin: 0; }
+
+/* ───────── A4 sheet (single source of truth) ───────── */
+.a4-paper {
+  /* ✏️ EDIT THESE to match your pre-printed design/logos */
+  --page-pad-top: 100px;
+  --page-pad-bottom: 108px;
+  --page-pad-x: 100px;
+
+  --label-scale: 1;
+
+  flex: 0 0 auto;
+  width: 210mm;
+  height: 297mm;
+  box-sizing: border-box;
+  padding: var(--page-pad-top) var(--page-pad-x) var(--page-pad-bottom);
+  margin: 0 auto;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.a4-paper.labels-1 { --label-scale: 1; }
+.a4-paper.labels-2 { --label-scale: 0.58; }
+.a4-paper.labels-3 { --label-scale: 0.32; }
+.a4-paper.labels-4 { --label-scale: 0.28; }
+.a4-paper.labels-5 { --label-scale: 0.22; }
+
+/* ───────── Labels ───────── */
+.product-label {
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 3mm 5mm;
+  border-bottom: 1px solid #222;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 2px;
+  text-align: center;
+  overflow: hidden;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.label-arabic-price { font-size: calc(150px * var(--label-scale)); font-weight: 800; line-height: 1.15; overflow-wrap: anywhere; }
+
+.currency-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 2mm;
+  font-size: calc(50px * var(--label-scale));
+  font-weight: 600;
+}
+
+/* Dashed line: border (prints), not background (doesn't print) */
+.currency-line {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 0;
+  border-top: 2px dashed #222;
+}
+
+.label-price { font-size: calc(120px * var(--label-scale)); font-weight: 900; line-height: 1.05; letter-spacing: -2px; overflow-wrap: anywhere; }
+.label-arabic { font-size: calc(65px * var(--label-scale)); font-weight: 700; line-height: 1.1; overflow-wrap: anywhere; }
+.label-english { font-size: calc(50px * var(--label-scale)); font-weight: 700; line-height: 1.1; overflow-wrap: anywhere; }
+
+.label-country {
+  flex: 0 0 auto;
+  font-size: calc(35px * var(--label-scale));
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+  direction: rtl;
+}
+
+/* ───────── Print ───────── */
+@media print {
+  html, body {
+    width: 210mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: white !important;
+  }
+
+  /* Remove the whole app (and anything else) except the preview */
+  body > *:not(.preview-overlay) { display: none !important; }
+
+  .preview-toolbar,
+  .no-print { display: none !important; }
+
+  .preview-overlay {
+    position: static !important;
+    inset: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    background: none !important;
+  }
+
+  .paper-container { display: block !important; padding: 0 !important; margin: 0 !important; }
+
+  .a4-paper {
+    margin: 0 !important;
+    box-shadow: none !important;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* ───────── Small screens ───────── */
+@media screen and (max-width: 760px) {
+  .preview-overlay { padding: 12px; }
+  .preview-toolbar { align-items: flex-start; flex-direction: column; }
+  .paper-container { justify-content: flex-start; overflow-x: auto; }
 }

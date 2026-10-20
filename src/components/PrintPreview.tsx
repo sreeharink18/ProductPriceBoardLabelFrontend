@@ -1,6 +1,7 @@
 import { Printer, Download, X } from "lucide-react";
 import type { Product } from "../services/productService";
 import "./PrintPreview.css";
+import { createPortal } from "react-dom";
 
 interface PrintPreviewProps {
   products: Product[];
@@ -17,7 +18,7 @@ export default function PrintPreview({products,country,onClose,}: PrintPreviewPr
     window.print();
   }
 
-  return (
+  return createPortal(
     <div className="preview-overlay">
       <div className="preview-toolbar no-print">
         <div>
@@ -63,10 +64,11 @@ export default function PrintPreview({products,country,onClose,}: PrintPreviewPr
                         {product.arabicPrice}
                     </div>
 
-                    <div className="currency-row">
-                        <span>KD:</span>
-                        <span dir="rtl">د.ك</span>
-                    </div>
+                  <div className="currency-row">
+                    <span>KD:</span>
+                    <span className="currency-line"></span>
+                    <span dir="rtl">د.ك</span>
+                   </div>
 
                     <div className="label-price">
                         {Number(product.sellingPrice).toFixed(3)}
@@ -89,6 +91,7 @@ export default function PrintPreview({products,country,onClose,}: PrintPreviewPr
             </div>
        
       </div>
-    </div>
+    </div>,
+     document.body
   );
 }
