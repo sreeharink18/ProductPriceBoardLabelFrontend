@@ -69,7 +69,7 @@ export default function PrintPreview({products,country,onClose,}: PrintPreviewPr
                     <span className="currency-line"></span>
                     <span dir="rtl">د.ك</span>
                    </div>
-
+ 
                     <div className="label-price">
                         {Number(product.sellingPrice).toFixed(3)}
                     </div>
