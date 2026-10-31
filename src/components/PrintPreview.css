@@ -100,50 +100,32 @@
   grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
   grid-template-rows: auto auto auto;
   grid-template-areas:
-    "price  arprice"
-    "line   line"
-    "eng    arb";
+    "arb   arprice"
+    "line  line"
+    "eng   price";
   align-content: center;
   align-items: center;
   column-gap: 4mm;
-  row-gap: 2mm;
-  padding: 1mm 5mm;
+  row-gap: 3mm;
+  padding: 3mm 5mm;
   text-align: left;
 }
 
-
-/* The KD: --- د.ك row is not used in this layout */
+/* Not used in this layout */
 .a4-paper.labels-4 .currency-row,
 .a4-paper.labels-5 .currency-row {
   display: none;
 }
 
-/* Row 1: prices */
-.a4-paper.labels-4 .label-price,
-.a4-paper.labels-5 .label-price {
-  grid-area: price;
+/* Left column: descriptions */
+.a4-paper.labels-4 .label-arabic,
+.a4-paper.labels-5 .label-arabic {
+  grid-area: arb;
   text-align: left;
-  font-size: min(30cqh, 11.5cqw);
-  line-height: 1;
-  letter-spacing: 0;
-}
-.a4-paper.labels-4 .product-label::after,
-.a4-paper.labels-5 .product-label::after {
-  content: "";
-  grid-area: line;
-  height: 0;
-  border-top: 1px dashed #6d5d02;
+  font-size: min(20cqh, 6.6cqw);
+  line-height: 1.1;
 }
 
-.a4-paper.labels-4 .label-arabic-price,
-.a4-paper.labels-5 .label-arabic-price {
-  grid-area: arprice;
-  text-align: right;
-  font-size: min(35cqh, 11.5cqw);
-  line-height: 1;
-}
-
-/* Row 2: descriptions */
 .a4-paper.labels-4 .label-english,
 .a4-paper.labels-5 .label-english {
   grid-area: eng;
@@ -152,21 +134,37 @@
   line-height: 1.1;
 }
 
-.a4-paper.labels-4 .label-arabic,
-.a4-paper.labels-5 .label-arabic {
-  grid-area: arb;
+/* Right column: prices */
+.a4-paper.labels-4 .label-arabic-price,
+.a4-paper.labels-5 .label-arabic-price {
+  grid-area: arprice;
   text-align: right;
-  font-size: min(20cqh, 6.6cqw);
-  line-height: 1.1;
+  font-size: min(35cqh, 11.5cqw);
+  line-height: 1;
 }
 
-/* Country was only ~7-8px at these counts; make it readable */
+.a4-paper.labels-4 .label-price,
+.a4-paper.labels-5 .label-price {
+  grid-area: price;
+  text-align: right;
+  font-size: min(30cqh, 11.5cqw);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
 .a4-paper.labels-4 .label-country,
 .a4-paper.labels-5 .label-country {
   font-size: 16px;
 }
 
-
+.a4-paper.labels-4 .product-label::after,
+.a4-paper.labels-5 .product-label::after {
+  content: "";
+  grid-area: line;
+  align-self: center;
+  height: 0;
+  border-top: 2px dashed #222;
+}
 /* ───────── Print ───────── */
 @media print {
   html, body {

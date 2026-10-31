@@ -75,7 +75,7 @@ function App() {
 
   function handleBarcodeChange(index: number,value: string) {
     setBarcodes((current) =>
-      current.map((barcode, i) =>
+      current.map((barcode, i) => 
         i === index ? value : barcode
       )
     );
