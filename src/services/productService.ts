@@ -4,6 +4,8 @@ export interface Product {
   arabicShortName: string;
   sellingPrice: string;
   arabicPrice : string;
+  countryEnglish?: string;
+countryArabic?: string;
 }
 const API_URL = "http://172.16.4.253:5000/api/Product/checkprice";
 function formatArabicPrice(value: string): string {

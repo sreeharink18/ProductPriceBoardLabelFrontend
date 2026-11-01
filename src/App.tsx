@@ -11,15 +11,9 @@ import type { Product } from "./services/productService";
 import "./App.css";
 import PrintPreview from "./components/PrintPreview";
 import {getLocations,type Location} from "./services/locationService";
+import { countries } from "./data/countries";
 
 function App() {
-  const countries = [
-    { code: "KW", english: "KUWAIT", arabic: "الكويت" },
-    { code: "SA", english: "SAUDI ARABIA", arabic: "السعودية" },
-    { code: "QA", english: "QATAR", arabic: "قطر" },
-    { code: "AE", english: "UAE", arabic: "الإمارات" },
-  ];
-  const [selectedCountry, setSelectedCountry] = useState("KW");
   const [locations, setLocations] = useState<Location[]>([]);
   const [locationLoading, setLocationLoading] = useState(true);
   const [locationError, setLocationError] = useState("");
@@ -27,6 +21,7 @@ function App() {
   const [count, setCount] = useState(1);
   const [barcodes, setBarcodes] = useState([""]);
   const [products, setProducts] = useState<Product[]>([]);
+  const [productCountries, setProductCountries] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [showPrintPreview, setShowPrintPreview] = useState(false);
@@ -70,6 +65,7 @@ function App() {
     );
 
     setProducts([]);
+    setProductCountries([]);
     setError("");
   }
 
@@ -103,6 +99,7 @@ function App() {
       );
 
       setProducts(results);
+      setProductCountries(results.map(() => "")); 
     } catch (err) {
       setError(
         err instanceof Error
@@ -113,6 +110,22 @@ function App() {
       setLoading(false);
     }
   }
+  function handleProductCountryChange(index: number, code: string) {
+  setProductCountries((current) =>
+    current.map((c, i) => (i === index ? code : c))
+  );
+}
+
+// Products with the chosen country added to both names
+const labelProducts = products.map((product, index) => {
+  const country = countries.find((c) => c.code === productCountries[index]);
+
+    return {
+    ...product,
+    countryEnglish: country?.english ?? "",
+    countryArabic: country?.arabic ?? "",
+  };
+});
 
   return (
     <main className="app-container">
@@ -151,7 +164,7 @@ function App() {
         </div>
 
         <div className="settings-grid">
-          <div className="form-group">
+          {/* <div className="form-group">
             <label htmlFor="country">Country</label>
 
             <select
@@ -165,7 +178,7 @@ function App() {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
           <div className="form-group">
             <label htmlFor="location">Store location</label>
 
@@ -257,15 +270,17 @@ function App() {
             </button>
           </div>
 
-          <ProductTable products={products} />
+          <ProductTable
+            products={labelProducts}
+            countries={countries}
+            selectedCountries={productCountries}
+            onCountryChange={handleProductCountryChange}
+          />
         </section>
       )}
       {showPrintPreview && (
         <PrintPreview
-          products={products}
-          country={countries.find(
-            (item) => item.code === selectedCountry
-          )!}
+          products={labelProducts}
           onClose={() => setShowPrintPreview(false)}
         />
       )}

@@ -38,7 +38,7 @@
 }
 .a4-paper.labels-1 { --label-scale: 1; }
 .a4-paper.labels-2 { --label-scale: 0.58; }
-.a4-paper.labels-3 { --label-scale: 0.32; }
+.a4-paper.labels-3 { --label-scale: 0.30; }
 .a4-paper.labels-4 { --label-scale: 0.28; }
 .a4-paper.labels-5 { --label-scale: 0.22; }
 
@@ -49,7 +49,7 @@
   width: 100%;
   box-sizing: border-box;
   padding: 3mm 5mm;
-  border-bottom: 2px solid #222;
+  border-bottom: 1px solid #222;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -77,12 +77,18 @@
   flex: 1 1 auto;
   min-width: 0;
   height: 0;
-  border-top: 2px dashed #222;
+  border-top: 1px dashed #222;
 }
 
 .label-price { font-size: calc(120px * var(--label-scale)); font-weight: 900; line-height: 1.05; letter-spacing: -2px; overflow-wrap: anywhere; }
 .label-arabic { font-size: calc(65px * var(--label-scale)); font-weight: 700; line-height: 1.1; overflow-wrap: anywhere; }
 .label-english { font-size: calc(50px * var(--label-scale)); font-weight: 700; line-height: 1.1; overflow-wrap: anywhere; }
+
+.country-name {
+  font-size: 0.65em;     /* ✏️ relative to the description size */
+  font-weight: 500;      /* ✏️ 400 = normal, 500 = slightly bolder */
+  white-space: nowrap;   /* keeps "(SAUDI ARABIA)" together on one line */
+}
 
 .label-country {
   flex: 0 0 auto;
@@ -93,6 +99,7 @@
   direction: rtl;
 }
 
+.a4-paper.labels-3 .product-label,
 .a4-paper.labels-4 .product-label,
 .a4-paper.labels-5 .product-label {
   container-type: size;
@@ -112,12 +119,14 @@
 }
 
 /* Not used in this layout */
+.a4-paper.labels-3 .currency-row,
 .a4-paper.labels-4 .currency-row,
 .a4-paper.labels-5 .currency-row {
   display: none;
 }
 
 /* Left column: descriptions */
+.a4-paper.labels-3 .label-arabic,
 .a4-paper.labels-4 .label-arabic,
 .a4-paper.labels-5 .label-arabic {
   grid-area: arb;
@@ -126,6 +135,7 @@
   line-height: 1.1;
 }
 
+.a4-paper.labels-3 .label-english,
 .a4-paper.labels-4 .label-english,
 .a4-paper.labels-5 .label-english {
   grid-area: eng;
@@ -135,6 +145,7 @@
 }
 
 /* Right column: prices */
+.a4-paper.labels-3 .label-arabic-price,
 .a4-paper.labels-4 .label-arabic-price,
 .a4-paper.labels-5 .label-arabic-price {
   grid-area: arprice;
@@ -143,6 +154,7 @@
   line-height: 1;
 }
 
+.a4-paper.labels-3 .label-price,
 .a4-paper.labels-4 .label-price,
 .a4-paper.labels-5 .label-price {
   grid-area: price;
@@ -152,18 +164,23 @@
   letter-spacing: 0;
 }
 
+.a4-paper.labels-3 .label-country,
 .a4-paper.labels-4 .label-country,
 .a4-paper.labels-5 .label-country {
   font-size: 16px;
 }
 
+.a4-paper.labels-3 .product-label::after,
 .a4-paper.labels-4 .product-label::after,
 .a4-paper.labels-5 .product-label::after {
   content: "";
   grid-area: line;
   align-self: center;
   height: 0;
-  border-top: 2px dashed #222;
+  border-top: 1px dashed #222;
+}
+.product-label:last-child {
+  border-bottom: none;
 }
 /* ───────── Print ───────── */
 @media print {

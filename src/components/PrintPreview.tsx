@@ -5,15 +5,10 @@ import { createPortal } from "react-dom";
 
 interface PrintPreviewProps {
   products: Product[];
-  country: {
-    code: string;
-    english: string;
-    arabic: string;
-  };
   onClose: () => void;
 }
 
-export default function PrintPreview({products,country,onClose,}: PrintPreviewProps) {
+export default function PrintPreview({products,onClose,}: PrintPreviewProps) {
   function handlePrint() {
     window.print();
   }
@@ -57,37 +52,51 @@ export default function PrintPreview({products,country,onClose,}: PrintPreviewPr
             <div className={`a4-paper labels-${products.length}`}>
                 {products.map((product, index) => (
                     <div
-                    className="product-label"
-                    key={`${product.barcode}-${index}`}
+                        className="product-label"
+                        key={`${product.barcode}-${index}`}
                     >
-                    <div className="label-arabic-price">
-                        {product.arabicPrice}
-                    </div>
+                        <div className="label-arabic-price">
+                            {product.arabicPrice}
+                        </div>
 
-                  <div className="currency-row">
-                    <span>KD:</span>
-                    <span className="currency-line"></span>
-                    <span dir="rtl">د.ك</span>
-                   </div>
- 
-                    <div className="label-price">
-                        {Number(product.sellingPrice).toFixed(3)}
-                    </div>
+                        <div className="currency-row">
+                            <span>KD:</span>
+                            <span className="currency-line"></span>
+                            <span dir="rtl">د.ك</span>
+                        </div>
 
-                    <div className="label-arabic" dir="rtl">
-                        {product.arabicShortName}
-                    </div>
+                        <div className="label-price">
+                            {Number(product.sellingPrice).toFixed(3)}
+                        </div>
 
-                    <div className="label-english">
-                        {product.englishShortName}
-                    </div>
+                            {/* <div className="label-arabic" dir="rtl">
+                            {product.arabicShortName}
+                        </div>
+
+                        <div className="label-english">
+                            {product.englishShortName}
+                        </div> */}
+                        <div className="label-arabic" dir="rtl">
+                            {product.arabicShortName}
+                            {product.countryArabic && (
+                                <>
+                                    {" "}
+                                    <span className="country-name">({product.countryArabic})</span>
+                                </>
+                            )}
+                        </div>
+
+                        <div className="label-english">
+                            {product.englishShortName}
+                            {product.countryEnglish && (
+                                <>
+                                    {" "}
+                                    <span className="country-name">({product.countryEnglish})</span>
+                                </>
+                            )}
+                        </div>
                     </div>
                 ))}
-                  <div className="label-country">
-                      <span>{country.english}</span>
-                      <span> - </span>
-                      <span>{country.arabic}</span>
-                  </div>
             </div>
        
       </div>
