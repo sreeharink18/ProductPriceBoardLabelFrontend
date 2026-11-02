@@ -13,6 +13,7 @@
 /* ───────── A4 sheet (single source of truth) ───────── */
 .a4-paper {
   /* ✏️ EDIT THESE to match your pre-printed design/logos */
+  font-family: "Montserrat Variable", "Segoe UI", Tahoma, Arial, sans-serif;
   --page-pad-top: 215px;
   --page-pad-bottom: 135px;
   --page-pad-x: 100px;

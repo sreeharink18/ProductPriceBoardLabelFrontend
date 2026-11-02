@@ -9,7 +9,8 @@ interface PrintPreviewProps {
 }
 
 export default function PrintPreview({products,onClose,}: PrintPreviewProps) {
-  function handlePrint() {
+  async function handlePrint() {
+    await document.fonts.ready;
     window.print();
   }
 
