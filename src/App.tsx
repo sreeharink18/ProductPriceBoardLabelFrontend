@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { Barcode, Search, Printer } from "lucide-react";
+import { Barcode, Search, Printer, LucideChevronsRight } from "lucide-react";
 
 import BarcodeInputs from "./components/BarcodeInputs";
 import ProductTable from "./components/ProductTable";
@@ -140,8 +140,16 @@ const labelProducts = products.map((product, index) => {
             <p>Product labels & printing</p>
           </div>
         </div>
+        
+          {/* <link href="http://172.16.4.160/price_board_kwt_gold/PriceBoard.aspx">Old Design</link> */}
+          <a
+            href="http://172.16.4.160/price_board_kwt_gold/PriceBoard.aspx"
+            className="old-design-btn"
+          >
+            <span>Old Design </span><LucideChevronsRight fontSize={10}/>
+          </a>
 
-        <span className="status-badge">Product Labels</span>
+        {/* <span className="status-badge">Product Labels</span> */}
       </header>
 
       <section className="welcome-section">

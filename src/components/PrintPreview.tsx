@@ -99,7 +99,6 @@ export default function PrintPreview({products,onClose,}: PrintPreviewProps) {
                     </div>
                 ))}
             </div>
-       
       </div>
     </div>,
      document.body

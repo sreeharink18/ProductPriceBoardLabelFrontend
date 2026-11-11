@@ -41,7 +41,33 @@ select {
 .brand {
   justify-content: flex-start;
 }
+.old-design-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 
+    padding: 9px 18px;
+    background-color: #E30613;
+    color: white;
+
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.old-design-btn:hover {
+    background-color: #b8050e;
+}
+
+.old-design-btn svg {
+    display: block;
+    flex-shrink: 0;
+}
 .brand-icon {
   width: 48px;
   height: 48px;
@@ -240,6 +266,7 @@ td {
 .arabic {
   font-size: 17px;
 }
+
 
 @media (max-width: 600px) {
   .app-container {
